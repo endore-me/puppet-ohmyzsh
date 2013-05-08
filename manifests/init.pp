@@ -6,6 +6,6 @@ class ohmyzsh {
     path   => '/usr/src/oh-my-zsh',
     source => 'git://github.com/robbyrussell/oh-my-zsh.git',
     branch => 'master',
-    update => 'update',
+    update => true,
   }
 }
