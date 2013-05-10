@@ -7,17 +7,17 @@ define ohmyzsh::user (
     'bundler'
   ]
 ) {
-  exec { "chsh -s $path $name":
-    unless => "grep -E '^${name}.+:${$path}$' /etc/passwd",
+  exec { "chsh -s $path $title":
+    unless => "grep -E '^${title}.+:${$path}$' /etc/passwd",
     path   => ['/bin'],
   }
-  if ( $name != "root" ) {
-    file { "~${name}/.zshrc":
+  if ( $title != "root" ) {
+    file { "~${title}/.zshrc":
       ensure  => present,
       replace => false,
       content => template('ohmyzsh/zshrc.erb'),
-      owner   => $name,
-      group   => $name,
+      owner   => $title,
+      group   => $title,
     }
   }
 }
