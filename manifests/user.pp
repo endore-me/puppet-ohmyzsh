@@ -9,10 +9,10 @@ define ohmyzsh::user (
     'bundler'
   ]
 ) {
-  #exec { "chsh -s $path $username":
-  #  unless => "grep -E '^${username}.+:${$path}$' /etc/passwd",
-  #  path   => ['/bin', '/usr/bin'],
-  #}
+  exec { "chsh -s $path $username":
+    unless => "grep -E '^${username}.+:${$path}$' /etc/passwd",
+    path   => ['/bin', '/usr/bin'],
+  }
   if ( $username != "root" ) {
     file { "$home/.zshrc":
       ensure  => present,
