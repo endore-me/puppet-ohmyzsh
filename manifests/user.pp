@@ -2,24 +2,25 @@ define ohmyzsh::user (
   $ensure  = present,
   $path    = '/usr/bin/zsh',
   $theme   = 'eastwood',
+  $name    = $title,
   $home    = undef,
   $plugins = [
     'git', 'rails', 'rails3', 'rbenv', 'ruby', 'debian', 'rake', 'tmux',
     'bundler'
   ]
 ) {
-  exec { "chsh -s $path $title":
-    unless => "grep -E '^${title}.+:${$path}$' /etc/passwd",
+  exec { "chsh -s $path $name":
+    unless => "grep -E '^${name}.+:${$path}$' /etc/passwd",
     path   => ['/bin', '/usr/bin'],
   }
-  if ( $title != "root" ) {
-    if $home == undef { $home = "/home/${title}/.zshrc" }
+  if ( $name != "root" ) {
+    if $home == undef { $home = "/home/${name}/.zshrc" }
     file { "$home":
       ensure  => present,
       replace => false,
       content => template('ohmyzsh/zshrc.erb'),
-      owner   => $title,
-      group   => $title,
+      owner   => $name,
+      group   => $name,
     }
   }
 }
