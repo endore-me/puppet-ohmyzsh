@@ -1,8 +1,8 @@
 define ohmyzsh::user (
+  $name    = $title,
   $ensure  = present,
   $path    = '/usr/bin/zsh',
   $theme   = 'eastwood',
-  $name    = $title,
   $home    = undef,
   $plugins = [
     'git', 'rails', 'rails3', 'rbenv', 'ruby', 'debian', 'rake', 'tmux',
@@ -19,7 +19,7 @@ define ohmyzsh::user (
     } else {
       $homedir = $home
     }
-    file { "$home":
+    file { "$homedir":
       ensure  => present,
       replace => false,
       content => template('ohmyzsh/zshrc.erb'),
