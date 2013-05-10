@@ -10,7 +10,7 @@ define ohmyzsh::user (
 ) {
   exec { "chsh -s $path $title":
     unless => "grep -E '^${title}.+:${$path}$' /etc/passwd",
-    path   => ['/bin'],
+    path   => ['/bin', '/usr/bin'],
   }
   if ( $title != "root" ) {
     if $home == undef { $home = "/home/${title}/.zshrc" }
