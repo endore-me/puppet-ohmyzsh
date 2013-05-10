@@ -14,10 +14,10 @@ define ohmyzsh::user (
     path   => ['/bin', '/usr/bin'],
   }
   if ( $name != "root" ) {
-    if $home == undef {
-      $homedir = "/home/${name}/.zshrc"
-    } else {
+    if $home {
       $homedir = $home
+    } else {
+      $homedir = "/home/${name}/.zshrc"
     }
     file { "$homedir":
       ensure  => present,
