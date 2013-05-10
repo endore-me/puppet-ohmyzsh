@@ -3,6 +3,7 @@ define ohmyzsh::user (
   $ensure  = present,
   $path    = '/usr/bin/zsh',
   $theme   = 'eastwood',
+  $home    = undef,
   $plugins = [
     'git', 'rails', 'rails3', 'rbenv', 'ruby', 'debian', 'rake', 'tmux',
     'bundler'
