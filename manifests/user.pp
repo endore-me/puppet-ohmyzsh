@@ -2,6 +2,7 @@ define ohmyzsh::user (
   $ensure  = present,
   $path    = '/usr/bin/zsh',
   $theme   = 'eastwood',
+  $home    = undef,
   $plugins = [
     'git', 'rails', 'rails3', 'rbenv', 'ruby', 'debian', 'rake', 'tmux',
     'bundler'
@@ -12,7 +13,8 @@ define ohmyzsh::user (
     path   => ['/bin'],
   }
   if ( $title != "root" ) {
-    file { "~${title}/.zshrc":
+    if $home == undef { $home = "/home/${title}/.zshrc" }
+    file { "$home":
       ensure  => present,
       replace => false,
       content => template('ohmyzsh/zshrc.erb'),
