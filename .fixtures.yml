@@ -1,0 +1,6 @@
+fixtures:
+  repositories:
+    git: git://github.com/mxhero/puppet-git.git
+    stdlib: git://github.com/puppetlabs/puppetlabs-stdlib.git
+  symlinks:
+    ohmyzsh: "#{source_dir}"

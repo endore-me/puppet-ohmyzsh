@@ -1,3 +1,13 @@
+# == Class: ohmyzsh
+#
+# === Examples
+#
+# class { 'ohmyzsh': }
+#
+# or
+#
+# include ohmyzsh
+#
 class ohmyzsh {
   package { 'zsh': }
   include git

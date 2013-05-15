@@ -1,3 +1,13 @@
+# == Define: user
+#
+# === Parameters
+#
+# [*username*]
+#   if not set title will be used
+#
+# [*home*]
+#   required homedirectory of the user
+#
 define ohmyzsh::user (
   $username = $title,
   $ensure   = present,
@@ -9,13 +19,13 @@ define ohmyzsh::user (
     'bundler'
   ]
 ) {
-  exec { "chsh -s $path $username":
-    unless => "grep -E '^${username}.+:${$path}$' /etc/passwd",
-    path   => ['/bin', '/usr/bin'],
-  }
-  if ( $username != "root" ) {
-    file { "$home/.zshrc":
-      ensure  => present,
+  if ( $username != 'root' ) {
+    exec { "chsh -s ${path} ${username}":
+      unless => "grep -E '^${username}.+:${$path}$' /etc/passwd",
+      path   => ['/bin', '/usr/bin'],
+    }
+    file { "${home}/.zshrc":
+      ensure  => $ensure,
       replace => false,
       content => template('ohmyzsh/zshrc.erb'),
       owner   => $username,
