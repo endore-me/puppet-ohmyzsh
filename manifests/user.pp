@@ -6,7 +6,7 @@
 #   if not set title will be used
 #
 # [*home*]
-#   required homedirectory of the user
+#   _required_ homedirectory of the user
 #
 define ohmyzsh::user (
   $username = $title,
